@@ -382,6 +382,8 @@ input.input-custom::-moz-placeholder {
 .form-custom-login .form-heading {
   background: #47c0c4;
   padding: 10px 15px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 .form-custom-login .form-heading h2 {
@@ -390,14 +392,33 @@ input.input-custom::-moz-placeholder {
 }
 
 .form-custom-login .form-group {
-  max-width: 100%;
-  margin: auto;
-  margin: 15px;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
 }
 
+.form-custom-login .form-group .icon {
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.form-custom-login .form-group .form-control-config {
+  width: 100%;
+}
+
+/* .form-custom-login .form-group span { */
+/*   width: 20%; */
+/* } */
+
 .form-custom-login .btn {
-  margin-right: 15px;
-  margin-bottom: 15px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
 }
 
 .login-gap {
