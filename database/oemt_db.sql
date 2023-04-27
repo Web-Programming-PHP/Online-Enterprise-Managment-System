@@ -61,7 +61,9 @@ CREATE TABLE `tbl_admin` (
 
 INSERT INTO `tbl_admin` (`user_id`, `fullname`, `username`, `email`, `password`, `temp_password`, `user_role`) VALUES
 (1, 'Admin', 'admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', NULL, 1),
-(27, 'John Smith', 'jsmith', 'jsmith@sample.com', '9ddc44f3f7f78da5781d6cab571b2fc5', '', 2);
+(28, 'CHK', 'kietcao', 'kietcao@sample.com', 'e10adc3949ba59abbe56e057f20f883e', '', 2),
+(29, 'CTK', 'kietcaoc3a', 'kietcaoc3a@sample.com', 'e10adc3949ba59abbe56e057f20f883e', '', 2),
+(30, 'BVCP', 'congphu', 'congphu@sample.com', 'e10adc3949ba59abbe56e057f20f883e', '', 2);
 
 --
 -- Indexes for dumped tables
