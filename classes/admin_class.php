@@ -53,7 +53,7 @@ class Admin_Class
                 $_SESSION['temp_password'] = $userRow['temp_password'];
 
                 if($userRow['temp_password'] == null) {
-                     header('Location: task-info.php');
+                    header('Location: task-info.php');
                 }else{
                     header('Location: changePasswordForEmployee.php');
                 }
