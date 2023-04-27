@@ -1,11 +1,11 @@
 <?php 
-    if(isset($_SERVER['HTTPS'])){
-        $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
-    }
-    else{
-        $protocol = 'http';
-    }
-$base_url = $protocol . "://".$_SERVER['SERVER_NAME'].'/' .(explode('/',$_SERVER['PHP_SELF'])[1]).'/';
+if(isset($_SERVER['HTTPS'])) {
+    $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+}
+else{
+    $protocol = 'http';
+}
+$base_url = $protocol . "://".$_SERVER['SERVER_NAME'].'/' .(explode('/', $_SERVER['PHP_SELF'])[1]).'/';
 ?>
 <?php
 require 'authentication.php'; // admin authentication check 
@@ -14,7 +14,7 @@ require 'authentication.php'; // admin authentication check
 $user_id = $_SESSION['admin_id'];
 $user_name = $_SESSION['name'];
 $security_key = $_SESSION['security_key'];
-if ($user_id == NULL || $security_key == NULL) {
+if ($user_id == null || $security_key == null) {
     header('Location: index.php');
 }
 
@@ -22,20 +22,20 @@ if ($user_id == NULL || $security_key == NULL) {
 $user_role = $_SESSION['user_role'];
 
 
-if(isset($_GET['delete_task'])){
-  $action_id = $_GET['task_id'];
+if(isset($_GET['delete_task'])) {
+    $action_id = $_GET['task_id'];
   
-  $sql = "DELETE FROM task_info WHERE task_id = :id";
-  $sent_po = "task-info.php";
-  $obj_admin->delete_data_by_this_method($sql,$action_id,$sent_po);
+    $sql = "DELETE FROM task_info WHERE task_id = :id";
+    $sent_po = "task-info.php";
+    $obj_admin->delete_data_by_this_method($sql, $action_id, $sent_po);
 }
 
-if(isset($_POST['add_task_post'])){
+if(isset($_POST['add_task_post'])) {
     $obj_admin->add_new_task($_POST);
 }
 
-$page_name="Task_Info";
-include("include/sidebar.php");
+$page_name="Daily-Task-Report";
+require "include/sidebar.php";
 // include('ems_header.php');
 
 
@@ -49,7 +49,7 @@ include("include/sidebar.php");
           <div class="gap"></div>
           <div class="row">
             <div class="col-md-4">
-                <input type="date" id="date" value="<?= $date ?>" class="form-control rounded-0">
+                <input type="date" id="date" value="<?php echo $date ?>" class="form-control rounded-0">
             </div>
             <div class="col-md-4">
                   <button class="btn btn-primary btn-sm btn-menu" type="button" id="filter"><i class="glyphicon glyphicon-filter"></i> Filter</button>
@@ -78,13 +78,13 @@ include("include/sidebar.php");
               <tbody>
 
               <?php 
-                if($user_role == 1){
-                  $sql = "SELECT a.*, b.fullname 
+                if($user_role == 1) {
+                    $sql = "SELECT a.*, b.fullname 
                         FROM task_info a
                         INNER JOIN tbl_admin b ON(a.t_user_id = b.user_id) where ('{$date}' BETWEEN date(a.t_start_time) and date(a.t_end_time))
                         ORDER BY a.task_id DESC";
                 }else{
-                  $sql = "SELECT a.*, b.fullname 
+                    $sql = "SELECT a.*, b.fullname 
                   FROM task_info a
                   INNER JOIN tbl_admin b ON(a.t_user_id = b.user_id)
                   WHERE a.t_user_id = $user_id and ('{$date}' BETWEEN date(a.t_start_time) and date(a.t_end_time))
@@ -94,11 +94,11 @@ include("include/sidebar.php");
                   $info = $obj_admin->manage_all_info($sql);
                   $serial  = 1;
                   $num_row = $info->rowCount();
-                  if($num_row==0){
+                if($num_row==0) {
                     echo '<tr><td colspan="7">No Data found</td></tr>';
-                  }
-                      while( $row = $info->fetch(PDO::FETCH_ASSOC) ){
-              ?>
+                }
+                while( $row = $info->fetch(PDO::FETCH_ASSOC) ){
+                    ?>
                 <tr>
                   <td><?php echo $serial; $serial++; ?></td>
                   <td><?php echo $row['t_title']; ?></td>
@@ -106,12 +106,12 @@ include("include/sidebar.php");
                   <td><?php echo $row['t_start_time']; ?></td>
                   <td><?php echo $row['t_end_time']; ?></td>
                   <td>
-                    <?php  if($row['status'] == 1){
-                        // echo "In Progress <span style='color:#5bcad9;' class=' glyphicon glyphicon-refresh' >";
-                        echo '<small class="label label-warning px-3">In Progress <span class="glyphicon glyphicon-refresh" ></small>';
-                    }elseif($row['status'] == 2){
-                        echo '<small class="label label-success px-3">In Completed <span class="glyphicon glyphicon-ok" ></small>';
-                        // echo "Completed <span style='color:#00af16;' class=' glyphicon glyphicon-ok' >";
+                    <?php  if($row['status'] == 1) {
+                                // echo "In Progress <span style='color:#5bcad9;' class=' glyphicon glyphicon-refresh' >";
+                                echo '<small class="label label-warning px-3">In Progress <span class="glyphicon glyphicon-refresh" ></small>';
+                    }elseif($row['status'] == 2) {
+                              echo '<small class="label label-success px-3">In Completed <span class="glyphicon glyphicon-ok" ></small>';
+                              // echo "Completed <span style='color:#00af16;' class=' glyphicon glyphicon-ok' >";
                     }else{
                         echo '<small class="label label-default border px-3">In Completed <span class="glyphicon glyphicon-remove" ></small>';
                     } ?>
@@ -130,7 +130,7 @@ include("include/sidebar.php");
 
 <?php
 
-include("include/footer.php");
+require "include/footer.php";
 
 
 
@@ -149,7 +149,7 @@ include("include/footer.php");
         <h4 class="mb-0 text-center"><b>Employee Task Managament System</b></h4>
         <h4 class="mb-0 text-center"><b>Daily Task Report</b></h4>
         <div class="mb-0 text-center"><b>as of</b></div>
-        <div class="mb-0 text-center"><b><?= date("F d, Y", strtotime($date)) ?></b></div>
+        <div class="mb-0 text-center"><b><?php echo date("F d, Y", strtotime($date)) ?></b></div>
         </div>
         <hr>
     </div>
@@ -164,7 +164,7 @@ $(function(){
         var h = $('head').clone()
         var ns = $($('noscript').html()).clone()
         var p = $('#printout').clone()
-        var base = '<?= $base_url ?>';
+        var base = '<?php echo $base_url ?>';
         h.find('link').each(function(){
             $(this).attr('href', base + $(this).attr('href'))
         })
