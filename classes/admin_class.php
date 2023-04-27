@@ -11,7 +11,7 @@ class Admin_Class
         $host_name='localhost';
         $user_name='root';
         $password='';
-        $db_name='etms_db';
+        $db_name='oems_db';
 
         try{
             $connection=new PDO("mysql:host={$host_name}; dbname={$db_name}", $user_name,  $password);
@@ -357,7 +357,10 @@ class Admin_Class
         $task_description = $this->test_form_input_data($data['task_description']);
         $t_start_time = $this->test_form_input_data($data['t_start_time']);
         $t_end_time = $this->test_form_input_data($data['t_end_time']);
+        echo $t_start_time;
         $status = $this->test_form_input_data($data['status']);
+        $t_result  = $this->test_form_input_data($data['t_result']);
+        $t_comment  = $this->test_form_input_data($data['t_comment']);
 
         if($user_role == 1) {
             $assign_to = $this->test_form_input_data($data['assign_to']);
@@ -370,14 +373,16 @@ class Admin_Class
         }
 
         try{
-            $update_task = $this->db->prepare("UPDATE task_info SET t_title = :x, t_description = :y, t_start_time = :z, t_end_time = :a, t_user_id = :b, status = :c WHERE task_id = :id ");
+            $update_task = $this->db->prepare("UPDATE task_info SET t_title = :x, t_description = :y, t_start_time = :z, t_end_time = :a, t_result= :b, t_comment = :c, t_user_id = :d, status = :e WHERE task_id = :id ");
 
             $update_task->bindparam(':x', $task_title);
             $update_task->bindparam(':y', $task_description);
             $update_task->bindparam(':z', $t_start_time);
             $update_task->bindparam(':a', $t_end_time);
-            $update_task->bindparam(':b', $assign_to);
-            $update_task->bindparam(':c', $status);
+            $update_task->bindparam(':b', $t_result);
+            $update_task->bindparam(':c', $t_comment);
+            $update_task->bindparam(':d', $assign_to);
+            $update_task->bindparam(':e', $status);
             $update_task->bindparam(':id', $task_id);
 
             $update_task->execute();

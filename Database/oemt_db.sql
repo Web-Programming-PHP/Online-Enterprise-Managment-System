@@ -3,9 +3,9 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
--- Database: `etms_db`
+-- Database: `oems_db`
 --
-CREATE DATABASE IF NOT EXISTS `etms_db`;
+CREATE DATABASE IF NOT EXISTS `oems_db`;
 
 -- --------------------------------------------------------
 
@@ -33,6 +33,8 @@ CREATE TABLE `task_info` (
   `t_description` text DEFAULT NULL,
   `t_start_time` datetime DEFAULT NULL,
   `t_end_time` datetime DEFAULT NULL,
+  `t_result` text DEFAULT NULL,
+  `t_comment` text DEFAULT NULL,
   `t_user_id` int(20) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0 COMMENT '0 = incomplete, 1 = In progress, 2 = complete'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
