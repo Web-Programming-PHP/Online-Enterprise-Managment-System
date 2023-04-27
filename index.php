@@ -40,7 +40,7 @@ require "include/login_header.php";
     <center><h2 style="margin-top:1px;">Online Enterprise Management System</h2></center>
         <form class="form-horizontal form-custom-login" action="" method="POST">
             <div class="form-heading">
-            <h2 class="text-center">Hi there!</h2>
+            <h2 class="text-center">Sign In</h2>
             </div>
             
             <!-- <div class="login-gap"></div> -->
