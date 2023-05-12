@@ -53,7 +53,6 @@ require "include/sidebar.php";
             </div>
             <div class="col-md-4">
                   <button class="btn btn-primary btn-sm btn-menu" type="button" id="filter"><i class="glyphicon glyphicon-filter"></i> Filter</button>
-                  <button class="btn btn-success btn-sm btn-menu" type="button" id="print"><i class="glyphicon glyphicon-print"></i> Print</button>
             </div>
 
             
@@ -149,32 +148,6 @@ require "include/footer.php";
 $(function(){
     $('#filter').click(function(){
         location.href="./daily-attendance-report.php?date="+$('#date').val()
-    })
-    $('#print').click(function(){
-        var h = $('head').clone()
-        var ns = $($('noscript').html()).clone()
-        var p = $('#printout').clone()
-        var base = '<?php echo $base_url ?>';
-        h.find('link').each(function(){
-            $(this).attr('href', base + $(this).attr('href'))
-        })
-        h.find('script').each(function(){
-            if($(this).attr('src') != "")
-            $(this).attr('src', base + $(this).attr('src'))
-        })
-        p.find('.table').addClass('table-bordered')
-        var nw = window.open("", "_blank","width:"+($(window).width() * .8)+",left:"+($(window).width() * .1)+",height:"+($(window).height() * .8)+",top:"+($(window).height() * .1))
-            nw.document.querySelector('head').innerHTML = h.html()
-            nw.document.querySelector('body').innerHTML = ns[0].outerHTML
-            nw.document.querySelector('body').innerHTML += p[0].outerHTML
-            nw.document.close()
-            setTimeout(() => {
-                nw.print()
-                setTimeout(() => {
-                    nw.close()
-                }, 200);
-            }, 200);
-
     })
 })
 </script>
